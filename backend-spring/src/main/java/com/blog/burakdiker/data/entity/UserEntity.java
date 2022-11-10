@@ -1,4 +1,4 @@
-package com.blog.burakdiker.entities;
+package com.blog.burakdiker.data.entity;
 
 import lombok.Data;
 
@@ -6,15 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
+@Entity //table mapping
 @Table(name="user")
-@Data
-public class User {
+@Data //getters setters
+public class UserEntity {
 
     @Id
     long id;
-
     String userName;
     String password;
+
 
 }
