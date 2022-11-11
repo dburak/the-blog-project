@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BlogDto {
 
-    private Long id;
+    private long id;
     private long userId;
-    private String header;
-    private String content;
+    private String blogTitle;
+    private String blogContent;
 }

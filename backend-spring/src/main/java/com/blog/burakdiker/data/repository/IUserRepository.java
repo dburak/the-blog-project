@@ -1,4 +1,11 @@
 package com.blog.burakdiker.data.repository;
 
-public interface IUserRepository {
+import com.blog.burakdiker.data.entity.UserEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface IUserRepository extends JpaRepository<UserEntity, Long> {
+
+
+
+
 }

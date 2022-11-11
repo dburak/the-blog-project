@@ -1,11 +1,12 @@
 package com.blog.burakdiker.data.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity //table mapping
 @Table(name="favorite")
@@ -15,7 +16,17 @@ public class FavoriteEntity {
 
     @Id
     long id;
-    long blogId;
-    long userId;
+
+    @ManyToOne(fetch = FetchType.LAZY) // to get only comment entity without user
+    @JoinColumn(name = "blog_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    BlogEntity blog;
+
+    @ManyToOne(fetch = FetchType.LAZY) // to get only comment entity without user
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    UserEntity user;
 
 }
