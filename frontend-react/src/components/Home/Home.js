@@ -1,6 +1,17 @@
 
 import React, {useState, useEffect} from "react"
 import Blog from "../Blog/Blog"
+import { Container } from '@mui/system'
+import { styled } from '@mui/material';
+
+const BlogContainer = styled(Container)({
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  alignItems: "center",
+  backgroundColor: "#e8f1fb",
+  height: "100vh"
+})
 
 const Home = () => {
   const [error, setError] = useState(null)
@@ -28,12 +39,11 @@ const Home = () => {
     return <div>Loading...</div>
   } else {
     return (
-     <div>
-      Home
+     <BlogContainer fixed>
       {blogList.map(blog => (
         <Blog title={blog.blogTitle} content={blog.blogContent}></Blog>
       ))}
-     </div>
+     </BlogContainer>
     )
   }
 }
