@@ -2,9 +2,7 @@ package com.blog.burakdiker.data.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity //table mapping
 @Table(name="user")
@@ -12,6 +10,7 @@ import javax.persistence.Table;
 public class UserEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
     long id;
     String userName;
     String password;

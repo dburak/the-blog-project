@@ -13,6 +13,7 @@ import javax.persistence.*;
 public class CommentEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
     long id;
 
     @ManyToOne(fetch = FetchType.LAZY) // to get only comment entity without user

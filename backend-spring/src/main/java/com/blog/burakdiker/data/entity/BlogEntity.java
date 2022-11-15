@@ -14,13 +14,12 @@ import javax.persistence.*;
 public class BlogEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
     long id;
 
-
-    @ManyToOne(fetch = FetchType.LAZY) // to get only blog entity without user
+    @ManyToOne(fetch = FetchType.EAGER) // to get blog entity with user
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     UserEntity user;
 
     String blogTitle;

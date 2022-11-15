@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {useState} from "react"
+import {useState, useEffect, useRef} from "react"
+import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -10,6 +11,9 @@ import Typography from '@mui/material/Typography';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import Box from '@mui/material/Box';
 import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import { Avatar } from '@mui/material';
+import { blue, red } from '@mui/material/colors';
+import Comment from '../Comment/Comment';
 
 
 
@@ -31,21 +35,71 @@ const CardActionStyle = styled(CardActions)({
 
 const BoxStyle = styled(Box)({
   display: 'flex',
-
+  justifyContent: 'center',
+  alignItems: 'center'
 })
 
+const BlogLinkName = styled(Link)({
+  textDecoration: 'none',
+  boxShadow: 'none',
+  '&:visited': {
+    color: 'inherit',                
+    },
+  '&:hover': {
+      textDecoration: 'underline',                
+      }
+});
+
+const BlogLinkImg = styled(Link)({
+  textDecoration: 'none',
+  boxShadow: 'none',
+});
+
 const Blog = (props) => {
-  const {title, content} = props;
+  const {blogId, userId, userName, title, content} = props;
   const [expanded, setExpanded] = useState(false);
+  const [favorite, setFavorite] = useState(false);
+  const [commentList, setCommentList] = useState([]);
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const isInitialMount = useRef(true);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+    getComments();
+    console.log(commentList)
   };
 
+  const handleFavorite = () => {
+    setFavorite(!favorite);
+  }
+
+  const getComments = () => {
+      fetch('/comments?blogId='+blogId)
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setCommentList(result);
+          },
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        );
+  }
+
+  useEffect(() => {
+    if(isInitialMount.current) {
+      isInitialMount.current = false
+    } else {
+      getComments();
+    }
+  }, [commentList])
 
   
   return(
-    <Card sx={{ width: 800 }}>
+    <Card sx={{ width: 800, marginBottom: 10, marginTop: 5}}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2" marginBottom="2rem">
           {title}
@@ -56,18 +110,25 @@ const Blog = (props) => {
       </CardContent>
       <CardActionStyle>
         <BoxStyle>
+        <BlogLinkImg to={{ pathname: '/users/' + userId }}>
+        <Avatar sx={{ bgcolor: blue[500] }}>
+          {userName.charAt(0).toUpperCase()}
+          </Avatar>
+          </BlogLinkImg>
           <Box ml={2}>
-            <Typography gutterBottom variant="subtitle2" component="p">
-              Burak Diker
+          <BlogLinkName to={{ pathname: '/users/' + userId }}>
+            <Typography gutterBottom variant="subtitle2" component="p" textAlign="left">
+              {userName}
             </Typography>
+            </BlogLinkName>
             <Typography gutterBottom variant="subtitle2" color="textSecondary" component="p">
               15 November 2022
             </Typography>
           </Box>
         </BoxStyle>
         <Box>
-          <IconButton>
-          <FavoriteOutlinedIcon />
+          <IconButton onClick={handleFavorite}>
+          <FavoriteOutlinedIcon style={favorite? {color: red[500]} : null } />
           </IconButton>
           <IconButton>
           <ExpandMore
@@ -84,7 +145,10 @@ const Blog = (props) => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography textAlign="left">
-          Some content
+          {error ? "error" : 
+          isLoaded ? commentList.map(comment => (
+            <Comment userId={1} userName={"dburak"} content={comment.text}></Comment>
+          )) : "Loading..."}
           </Typography>
         </CardContent>
       </Collapse>

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class FavoriteDto {
-    private long id;
-    private long blogId;
-    private long userId;
+    private Long id;
+    private Long blogId;
+    private Long userId;
 }
