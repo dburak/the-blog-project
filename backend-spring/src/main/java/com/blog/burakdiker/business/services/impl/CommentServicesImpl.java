@@ -51,8 +51,8 @@ public class CommentServicesImpl implements ICommentServices {
         BlogDto blog = blogServices.findBlog(commentDto.getBlogId());
         if(user == null && blog == null )
             return null;
-        CommentEntity commentEntityEntity = dtoToEntity(commentDto);
-        repository.save(commentEntityEntity);
+        CommentEntity commentEntity = dtoToEntity(commentDto);
+        repository.save(commentEntity);
         return commentDto;
     }
 

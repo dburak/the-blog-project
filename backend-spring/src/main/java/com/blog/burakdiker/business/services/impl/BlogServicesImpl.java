@@ -26,7 +26,6 @@ public class BlogServicesImpl implements IBlogServices {
     //injection
     private final IBlogRepository repository;
     private final ModelMapperBean modelMapperBean;
-
     private final UserServicesImpl userServices;
 
 
