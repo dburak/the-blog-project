@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import CardContent from '@mui/material/CardContent';
 import {
@@ -9,6 +10,11 @@ import {
   Alert,
 } from '@mui/material';
 import { blue, red } from '@mui/material/colors';
+
+const CommentLinkImg = styled(Link)({
+  textDecoration: 'none',
+  boxShadow: 'none',
+});
 
 const Comment = (props) => {
   const { content, userId, userName } = props;
@@ -23,9 +29,11 @@ const Comment = (props) => {
         value={content}
         startAdornment={
           <InputAdornment position='start'>
-            <Avatar sx={{ bgcolor: blue[500] }}>
-              {userName.charAt(0).toUpperCase()}
-            </Avatar>
+            <CommentLinkImg to={{ pathname: '/users/' + userId }}>
+              <Avatar sx={{ bgcolor: blue[500] }}>
+                {userName.charAt(0).toUpperCase()}
+              </Avatar>
+            </CommentLinkImg>
           </InputAdornment>
         }
       ></OutlinedInput>
