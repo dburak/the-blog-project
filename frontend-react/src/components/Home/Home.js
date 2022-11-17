@@ -47,6 +47,7 @@ const Home = () => {
         />
         {blogList.map((blog) => (
           <Blog
+            favorites={blog.blogFavorites}
             blogId={blog.id}
             userId={blog.userId}
             userName={blog.userName}

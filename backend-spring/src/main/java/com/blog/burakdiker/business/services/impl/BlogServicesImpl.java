@@ -33,7 +33,7 @@ public class BlogServicesImpl implements IBlogServices {
     private final UserServicesImpl userServices;
     private FavoriteServicesImpl favoriteServices;
 
-    @Autowired
+    @Autowired // TO BREAK CIRCULAR DEPENDENCY
     public void setFavoriteServices(FavoriteServicesImpl favoriteServices){
         this.favoriteServices = favoriteServices;
     }

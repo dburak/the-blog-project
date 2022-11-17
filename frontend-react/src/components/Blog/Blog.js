@@ -55,14 +55,16 @@ const BlogLinkImg = styled(Link)({
 });
 
 const Blog = (props) => {
-  const { blogId, userId, userName, title, content } = props;
+  const { blogId, userId, userName, title, content, favorites } = props;
   const [expanded, setExpanded] = useState(false);
-  const [favorite, setFavorite] = useState(false);
   const [commentList, setCommentList] = useState([]);
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const isInitialMount = useRef(true);
   const [refresh, setRefresh] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(false);
+  const [favoriteCount, setFavoriteCount] = useState(favorites.length);
+  const [favoriteId, setFavoriteId] = useState(null);
 
   const setCommentRefresh = () => {
     setRefresh(true);
@@ -75,7 +77,14 @@ const Blog = (props) => {
   };
 
   const handleFavorite = () => {
-    setFavorite(!favorite);
+    setIsFavorited(!isFavorited);
+    if(!isFavorited){
+      saveFavorite();
+      setFavoriteCount(favoriteCount + 1)
+    } else {
+      deleteFavorite();
+      setFavoriteCount(favoriteCount - 1)
+    }
   };
 
   const getComments = () => {
@@ -94,6 +103,38 @@ const Blog = (props) => {
       setRefresh(false);
   };
 
+  const saveFavorite = () => {
+    fetch("/favorites",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId,
+        blogId: blogId,
+      }),
+    })
+    .then((res) => res.json())
+    .catch((err) => console.log("error"))
+  }
+
+  const deleteFavorite = () => {
+    fetch("/favorites/"+favoriteId, {
+      method: "DELETE"
+    })
+    .catch((err) => console.log("error"))
+  }
+
+
+  const checkFavorites = () => {
+    let favoriteControl = favorites.find(favorite => favorite.userId === userId)
+    if(favoriteControl != null){
+      setFavoriteId(favoriteControl.id);
+      setIsFavorited(true);
+    }
+  }
+
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
@@ -101,6 +142,8 @@ const Blog = (props) => {
       getComments();
     }
   }, [refresh]);
+
+  useEffect(() => {checkFavorites()}, [])
 
   return (
     <Card sx={{ width: 800, marginBottom: 10, marginTop: 5 }}>
@@ -153,9 +196,10 @@ const Blog = (props) => {
         <Box>
           <IconButton onClick={handleFavorite}>
             <FavoriteOutlinedIcon
-              style={favorite ? { color: red[500] } : null}
+              style={isFavorited ? { color: red[500] } : null}
             />
           </IconButton>
+          {favoriteCount}
           <IconButton>
             <ExpandMore
               expand={expanded}
