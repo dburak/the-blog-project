@@ -2,18 +2,22 @@ package com.blog.burakdiker.business.services.impl;
 
 import com.blog.burakdiker.bean.ModelMapperBean;
 import com.blog.burakdiker.business.dto.BlogDto;
+import com.blog.burakdiker.business.dto.FavoriteDto;
 import com.blog.burakdiker.business.dto.UserDto;
 import com.blog.burakdiker.business.services.IBlogServices;
 import com.blog.burakdiker.data.entity.BlogEntity;
 import com.blog.burakdiker.data.entity.UserEntity;
 import com.blog.burakdiker.data.repository.IBlogRepository;
+import com.blog.burakdiker.data.repository.IFavoriteRepository;
 import com.blog.burakdiker.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -27,6 +31,12 @@ public class BlogServicesImpl implements IBlogServices {
     private final IBlogRepository repository;
     private final ModelMapperBean modelMapperBean;
     private final UserServicesImpl userServices;
+    private FavoriteServicesImpl favoriteServices;
+
+    @Autowired
+    public void setFavoriteServices(FavoriteServicesImpl favoriteServices){
+        this.favoriteServices = favoriteServices;
+    }
 
 
     @Override
@@ -62,11 +72,10 @@ public class BlogServicesImpl implements IBlogServices {
             }
         }
         else {
-
             blogEntityList = repository.findAll();
             for (BlogEntity temp : blogEntityList) {
-                BlogDto entityToDto = entityToDto(temp);
-                dtoList.add(entityToDto);
+                List<FavoriteDto> favorites = favoriteServices.listFavorites(Optional.ofNullable(null), Optional.of(temp.getId()));
+                dtoList.add(new BlogDto(temp, favorites));
             }
         }
         return dtoList;
