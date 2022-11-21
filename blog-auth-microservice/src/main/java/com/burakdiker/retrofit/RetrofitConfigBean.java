@@ -1,6 +1,7 @@
 package com.burakdiker.retrofit;
 
 
+import com.burakdiker.retrofit.request.IFavoriteServiceRequest;
 import com.google.gson.Gson;
 import com.burakdiker.retrofit.request.IBlogServiceRequest;
 import com.burakdiker.retrofit.request.IDailyServiceRequest;
@@ -48,6 +49,7 @@ public class RetrofitConfigBean {
     //Microservice
     //IDailyServiceRequest
     //IBlogServiceRequest
+    //ICommentServiceRequest
     @Bean
     public IDailyServiceRequest dailyServiceRequest(Retrofit.Builder builder,@Value("${daily.service.url}") String dailyBaseUrl){
         return builder.baseUrl(dailyBaseUrl).build().create(IDailyServiceRequest.class);
@@ -61,6 +63,11 @@ public class RetrofitConfigBean {
     @Bean
     public ICommentServiceRequest commentServiceRequest(Retrofit.Builder builder, @Value("${blog.service.url}") String commentBaseUrl){
         return builder.baseUrl(commentBaseUrl).build().create(ICommentServiceRequest.class);
+    }
+
+    @Bean
+    public IFavoriteServiceRequest favoriteServiceRequest(Retrofit.Builder builder, @Value("${blog.service.url}") String favoriteBaseUrl){
+        return builder.baseUrl(favoriteBaseUrl).build().create(IFavoriteServiceRequest.class);
     }
 
 }

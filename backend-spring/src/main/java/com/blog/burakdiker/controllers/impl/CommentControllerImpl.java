@@ -32,8 +32,8 @@ public class CommentControllerImpl implements ICommentController {
     @Override
     @GetMapping
     public ResponseEntity<List<CommentDto>> listComments(@RequestParam Optional<Long> userId,
-                                                         @RequestParam Optional<Long> commentId) {
-        return ResponseEntity.ok(services.listComments(userId, commentId));
+                                                         @RequestParam Optional<Long> blogId) {
+        return ResponseEntity.ok(services.listComments(userId, blogId));
     }
 
     // CREATE
