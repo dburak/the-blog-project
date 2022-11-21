@@ -1,8 +1,10 @@
 package com.burakdiker.retrofit;
 
+
 import com.google.gson.Gson;
 import com.burakdiker.retrofit.request.IBlogServiceRequest;
 import com.burakdiker.retrofit.request.IDailyServiceRequest;
+import com.burakdiker.retrofit.request.ICommentServiceRequest;
 import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,6 +56,11 @@ public class RetrofitConfigBean {
     @Bean
     public IBlogServiceRequest blogServiceRequest(Retrofit.Builder builder, @Value("${blog.service.url}") String blogBaseUrl){
         return builder.baseUrl(blogBaseUrl).build().create(IBlogServiceRequest.class);
+    }
+
+    @Bean
+    public ICommentServiceRequest commentServiceRequest(Retrofit.Builder builder, @Value("${blog.service.url}") String commentBaseUrl){
+        return builder.baseUrl(commentBaseUrl).build().create(ICommentServiceRequest.class);
     }
 
 }

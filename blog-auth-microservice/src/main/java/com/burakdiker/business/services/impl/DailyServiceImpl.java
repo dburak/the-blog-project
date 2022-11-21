@@ -15,7 +15,7 @@ import java.util.List;
 @Log4j2
 
 @Service
-public class DailyService implements IDailyService {
+public class DailyServiceImpl implements IDailyService {
     // REST             REQUEST
     // ----------       -------
     // @GetMapping      @GET

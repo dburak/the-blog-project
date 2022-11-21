@@ -14,7 +14,7 @@ import java.util.List;
 @Log4j2
 
 @Service
-public class BlogService implements IBlogService {
+public class BlogServiceImpl implements IBlogService {
 
     //injection
     private final IBlogServiceRequest iBlogServiceRequest;

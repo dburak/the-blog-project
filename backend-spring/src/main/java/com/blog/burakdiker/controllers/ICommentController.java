@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface ICommentController {
     //LIST
-    ResponseEntity<List<CommentDto>> listComments(Optional<Long> userId, Optional<Long> blogId);
+    ResponseEntity<List<CommentDto>> listComments(Optional<Long> userId, Optional<Long> commentId);
 
     //CREATE
     ResponseEntity<?> createComment(CommentDto commentDto);
