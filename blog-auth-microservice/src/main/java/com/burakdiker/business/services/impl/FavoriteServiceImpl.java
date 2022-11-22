@@ -40,7 +40,7 @@ public class FavoriteServiceImpl implements IFavoriteService {
 
     @Override
     public void favoriteDelete(Long id) {
-
+        RetrofitCommonGenerics.retrofitGenerics(iFavoriteServiceRequest.favoriteDelete(id));
     }
 
     @Override

@@ -1,11 +1,8 @@
 package com.burakdiker.retrofit;
 
 
-import com.burakdiker.retrofit.request.IFavoriteServiceRequest;
+import com.burakdiker.retrofit.request.*;
 import com.google.gson.Gson;
-import com.burakdiker.retrofit.request.IBlogServiceRequest;
-import com.burakdiker.retrofit.request.IDailyServiceRequest;
-import com.burakdiker.retrofit.request.ICommentServiceRequest;
 import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,6 +47,8 @@ public class RetrofitConfigBean {
     //IDailyServiceRequest
     //IBlogServiceRequest
     //ICommentServiceRequest
+    //IFavoriteServiceRequest
+    //IBlogUserServiceRequest
     @Bean
     public IDailyServiceRequest dailyServiceRequest(Retrofit.Builder builder,@Value("${daily.service.url}") String dailyBaseUrl){
         return builder.baseUrl(dailyBaseUrl).build().create(IDailyServiceRequest.class);
@@ -68,6 +67,11 @@ public class RetrofitConfigBean {
     @Bean
     public IFavoriteServiceRequest favoriteServiceRequest(Retrofit.Builder builder, @Value("${blog.service.url}") String favoriteBaseUrl){
         return builder.baseUrl(favoriteBaseUrl).build().create(IFavoriteServiceRequest.class);
+    }
+
+    @Bean
+    public IBlogUserServiceRequest blogUserServiceRequest(Retrofit.Builder builder, @Value("${blog.service.url}") String blogUserBaseUrl){
+        return builder.baseUrl(blogUserBaseUrl).build().create(IBlogUserServiceRequest.class);
     }
 
 }
