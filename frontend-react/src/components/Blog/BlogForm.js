@@ -63,7 +63,7 @@ const BlogForm = (props) => {
   const [open, setOpen] = useState(false);
 
   const saveBlog = () => {
-    fetch("/blogs",
+    fetch("/blog",
     {
       method: "POST",
       headers: {

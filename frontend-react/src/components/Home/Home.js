@@ -18,7 +18,7 @@ const Home = () => {
   const [blogList, setBlogList] = useState([]);
 
   useEffect(() => {
-    fetch('/blogs')
+    fetch('gateway/blog')
       .then((res) => res.json())
       .then(
         (result) => {

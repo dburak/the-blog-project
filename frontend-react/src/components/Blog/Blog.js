@@ -88,7 +88,7 @@ const Blog = (props) => {
   };
 
   const getComments = () => {
-    fetch('/comments?blogId=' + blogId)
+    fetch('gateway/comment?blogId=' + blogId)
       .then((res) => res.json())
       .then(
         (result) => {
@@ -104,7 +104,7 @@ const Blog = (props) => {
   };
 
   const saveFavorite = () => {
-    fetch("/favorites",
+    fetch("gateway/favorite",
     {
       method: "POST",
       headers: {
@@ -120,7 +120,7 @@ const Blog = (props) => {
   }
 
   const deleteFavorite = () => {
-    fetch("/favorites/"+favoriteId, {
+    fetch("/favorite/"+favoriteId, {
       method: "DELETE"
     })
     .catch((err) => console.log("error"))
