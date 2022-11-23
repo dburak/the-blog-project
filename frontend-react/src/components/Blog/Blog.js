@@ -120,7 +120,7 @@ const Blog = (props) => {
   }
 
   const deleteFavorite = () => {
-    fetch("/favorite/"+favoriteId, {
+    fetch("gateway/favorite/"+favoriteId, {
       method: "DELETE"
     })
     .catch((err) => console.log("error"))

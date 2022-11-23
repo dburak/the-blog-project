@@ -25,7 +25,7 @@ const CommentForm = (props) => {
 
 
   const saveComment = () => {
-    fetch("/comment",
+    fetch("gateway/comment",
     {
       method: "POST",
       headers: {

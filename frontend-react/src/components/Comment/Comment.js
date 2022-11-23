@@ -4,10 +4,8 @@ import { styled } from '@mui/material/styles';
 import CardContent from '@mui/material/CardContent';
 import {
   Avatar,
-  Button,
   InputAdornment,
   OutlinedInput,
-  Alert,
 } from '@mui/material';
 import { blue, red } from '@mui/material/colors';
 

@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, Switch, Route} from "react-router-dom"
+import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom"
 import Home from "../src/components/Home/Home"
 import User from "../src/components/User/User"
 import Navbar from "../src/components/Navbar/Navbar"
@@ -13,7 +13,9 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/users/:userId" component={User}></Route>
-          <Route exact path="/auth" component={Auth}></Route>
+          <Route exact path="/auth">
+          {localStorage.getItem("currentUser") != null ? <Redirect to="/" /> : <Auth />}
+          </Route>
         </Switch>
       </BrowserRouter>
     </div>
