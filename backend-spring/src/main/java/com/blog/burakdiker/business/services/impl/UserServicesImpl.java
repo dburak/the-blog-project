@@ -82,7 +82,7 @@ public class UserServicesImpl implements IUserServices {
         UserEntity registerEntity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + " id cannot be found"));
         if (registerEntity != null) {
             registerEntity.setId(userDto.getId());
-            registerEntity.setUserName(userDto.getUsername());
+            registerEntity.setUserName(userDto.getUserName());
             registerEntity.setPassword(userDto.getPassword());
             repository.save(registerEntity);
         }

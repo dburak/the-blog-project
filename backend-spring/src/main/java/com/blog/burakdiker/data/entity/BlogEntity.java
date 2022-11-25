@@ -1,8 +1,10 @@
 package com.blog.burakdiker.data.entity;
 
 import com.blog.burakdiker.business.dto.BlogDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -28,5 +30,9 @@ public class BlogEntity {
     @Lob
     @Column(columnDefinition = "text")
     String blogContent;
-    
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    Date createdDate;
+
 }

@@ -55,7 +55,7 @@ const BlogLinkImg = styled(Link)({
 });
 
 const Blog = (props) => {
-  const { blogId, userId, userName, title, content, favorites } = props;
+  const { blogId, userId, userName, title, content, favorites, createdDate } = props;
   const [expanded, setExpanded] = useState(false);
   const [commentList, setCommentList] = useState([]);
   const [error, setError] = useState(null);
@@ -195,7 +195,7 @@ const Blog = (props) => {
               color='textSecondary'
               component='p'
             >
-              15 November 2022
+              {createdDate}
             </Typography>
           </Box>
         </BoxStyle>
@@ -234,8 +234,8 @@ const Blog = (props) => {
               : isLoaded
               ? commentList.map((comment) => (
                   <Comment
-                    userId={1}
-                    userName={'User1'}
+                    userId={comment.userId}
+                    userName={comment.userName}
                     content={comment.text}
                   ></Comment>
                 ))
@@ -244,8 +244,8 @@ const Blog = (props) => {
               ''
             ) : (
               <CommentForm
-                userId={1}
-                userName={'User1'}
+                userId={localStorage.getItem("currentUser")}
+                userName={localStorage.getItem("username")}
                 blogId={blogId}
                 setCommentRefresh={setCommentRefresh}
               ></CommentForm>

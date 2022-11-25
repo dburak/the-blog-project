@@ -53,6 +53,7 @@ const Home = () => {
             userName={blog.userName}
             title={blog.blogTitle}
             content={blog.blogContent}
+            createdDate={blog.createdDate}
           ></Blog>
         ))}
       </BlogContainer>
