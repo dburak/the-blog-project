@@ -4,6 +4,7 @@ import com.burakdiker.business.services.IBlogService;
 import com.burakdiker.retrofit.RetrofitCommonGenerics;
 import com.burakdiker.retrofit.request.IBlogServiceRequest;
 import com.google.gson.JsonElement;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;

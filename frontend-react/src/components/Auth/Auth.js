@@ -22,6 +22,22 @@ const Auth = () => {
   };
 
   const sendRequest = (path) => {
+
+    if(path === "register") {
+      fetch('http://localhost:1111/api/v1/users/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      })
+        .then((res) => res.json())
+        .catch((err) => console.log(err));
+    }
+
     fetch('/api/authentication/' + path, {
       method: 'POST',
       headers: {
@@ -34,23 +50,26 @@ const Auth = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        localStorage.setItem('tokenKey', result.message);
+        localStorage.setItem('tokenKey', "Bearer " + result.message);
         localStorage.setItem('currentUser', result.id);
         localStorage.setItem('username', username);
       })
-      .catch((err) => console.log('error'));
+      .catch((err) => console.log(err));
   };
 
   const handleButton = (path) => {
     sendRequest(path);
     setUsername('');
     setPassword('');
-    history.go("/auth")
-  };
+    setTimeout(() => {
+      window.location.reload(true);
+    }, 2000)
+    //console.log(localStorage);
+  }
 
   return (
     <div>
-      <h1>Register and Login Blog</h1>
+      <h1>Register & Login Blog</h1>
       <FormControl>
         <InputLabel>Username</InputLabel>
         <Input onChange={(i) => handleUsername(i.target.value)} />

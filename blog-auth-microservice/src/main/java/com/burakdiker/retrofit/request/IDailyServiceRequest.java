@@ -27,7 +27,7 @@ public interface IDailyServiceRequest {
     //LIST
 
     @GET("/api/v1/daily/list")
-    Call<List<JsonElement>> dailyList();
+    Call<List<JsonElement>> dailyList() ;
 
     //FIND
     @GET("/api/v1/daily/find/{id}")

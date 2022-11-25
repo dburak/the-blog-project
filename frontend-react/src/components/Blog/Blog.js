@@ -65,6 +65,7 @@ const Blog = (props) => {
   const [isFavorited, setIsFavorited] = useState(false);
   const [favoriteCount, setFavoriteCount] = useState(favorites.length);
   const [favoriteId, setFavoriteId] = useState(null);
+  let disabled = localStorage.getItem('currentUser') == null ? true : false;
 
   const setCommentRefresh = () => {
     setRefresh(true);
@@ -78,12 +79,12 @@ const Blog = (props) => {
 
   const handleFavorite = () => {
     setIsFavorited(!isFavorited);
-    if(!isFavorited){
+    if (!isFavorited) {
       saveFavorite();
-      setFavoriteCount(favoriteCount + 1)
+      setFavoriteCount(favoriteCount + 1);
     } else {
       deleteFavorite();
-      setFavoriteCount(favoriteCount - 1)
+      setFavoriteCount(favoriteCount - 1);
     }
   };
 
@@ -100,40 +101,43 @@ const Blog = (props) => {
           setError(error);
         }
       );
-      setRefresh(false);
+    setRefresh(false);
   };
 
   const saveFavorite = () => {
-    fetch("gateway/favorite",
-    {
-      method: "POST",
+    fetch('gateway/favorite', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem("tokenKey")
       },
       body: JSON.stringify({
-        userId: userId,
+        userId: localStorage.getItem("currentUser"),
         blogId: blogId,
       }),
     })
-    .then((res) => res.json())
-    .catch((err) => console.log("error"))
-  }
+      .then((res) => res.json())
+      .catch((err) => console.log('error'));
+  };
 
   const deleteFavorite = () => {
-    fetch("gateway/favorite/"+favoriteId, {
-      method: "DELETE"
-    })
-    .catch((err) => console.log("error"))
-  }
-
+    fetch('gateway/favorite/' + favoriteId, {
+      method: 'DELETE',
+      headers: {
+        "Authorization": localStorage.getItem("tokenKey")
+      }
+    }).catch((err) => console.log(err));
+  };
 
   const checkFavorites = () => {
-    let favoriteControl = favorites.find(favorite => favorite.userId === userId)
-    if(favoriteControl != null){
+    let favoriteControl = favorites.find(
+      (favorite) => "" + favorite.userId === localStorage.getItem("currentUser")
+    );
+    if (favoriteControl != null) {
       setFavoriteId(favoriteControl.id);
       setIsFavorited(true);
     }
-  }
+  };
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -143,7 +147,9 @@ const Blog = (props) => {
     }
   }, [refresh]);
 
-  useEffect(() => {checkFavorites()}, [])
+  useEffect(() => {
+    checkFavorites();
+  }, []);
 
   return (
     <Card sx={{ width: 800, marginBottom: 10, marginTop: 5 }}>
@@ -194,11 +200,19 @@ const Blog = (props) => {
           </Box>
         </BoxStyle>
         <Box>
-          <IconButton onClick={handleFavorite}>
-            <FavoriteOutlinedIcon
-              style={isFavorited ? { color: red[500] } : null}
-            />
-          </IconButton>
+          {disabled ? (
+            <IconButton disabled onClick={handleFavorite}>
+              <FavoriteOutlinedIcon
+                style={isFavorited ? { color: red[500] } : null}
+              />
+            </IconButton>
+          ) : (
+            <IconButton onClick={handleFavorite}>
+              <FavoriteOutlinedIcon
+                style={isFavorited ? { color: red[500] } : null}
+              />
+            </IconButton>
+          )}
           {favoriteCount}
           <IconButton>
             <ExpandMore
@@ -226,12 +240,16 @@ const Blog = (props) => {
                   ></Comment>
                 ))
               : 'Loading...'}
-            <CommentForm
-              userId={1}
-              userName={'User1'}
-              blogId={blogId}
-              setCommentRefresh={setCommentRefresh}
-            ></CommentForm>
+            {disabled ? (
+              ''
+            ) : (
+              <CommentForm
+                userId={1}
+                userName={'User1'}
+                blogId={blogId}
+                setCommentRefresh={setCommentRefresh}
+              ></CommentForm>
+            )}
           </Typography>
         </CardContent>
       </Collapse>

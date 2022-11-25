@@ -10,6 +10,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Log4j2
@@ -26,9 +27,10 @@ public class CommentServiceImpl implements ICommentService {
     }
 
     @Override
-    public List<JsonElement> commentList() {
-        return RetrofitCommonGenerics.retrofitGenerics(iCommentServiceRequest.commentList());
+    public List<JsonElement> commentList(Long blogId) {
+        return RetrofitCommonGenerics.retrofitGenerics(iCommentServiceRequest.commentList(blogId));
     }
+
 
     @Override
     public JsonElement commentFind(Long id) {

@@ -39,12 +39,12 @@ const Home = () => {
   } else {
     return (
       <BlogContainer>
-        <BlogForm
-          userId={1}
-          userName={"asdasdas"}
+        {localStorage.getItem("currentUser") == null ? "" : <BlogForm
+          userId={localStorage.getItem("currentUser")}
+          userName={localStorage.getItem("username")}
           title={"title"}
           content={"content"}
-        />
+        />}
         {blogList.map((blog) => (
           <Blog
             favorites={blog.blogFavorites}

@@ -7,15 +7,27 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const NavBarLink = styled(Link)({
   textDecoration: 'none',
   boxShadow: 'none',
   color: 'white',
+  marginRight: 32
 });
 
+
 const Navbar = () => {
-  let userId = 1;
+
+  let history = useHistory();
+
+  const onClick = () => {
+    localStorage.removeItem("tokenKey")
+    localStorage.removeItem("currentUser")
+    localStorage.removeItem("username")
+    history.go("/");
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static'>
@@ -40,7 +52,11 @@ const Navbar = () => {
             variant='h6'
             component='div'
           >
-            <NavBarLink to={{ pathname: '/users/' + userId }}>User</NavBarLink>
+            {localStorage.getItem("currentUser") == null ? <NavBarLink to="/auth">Register & Login</NavBarLink> : 
+            <div>
+              <NavBarLink to={{ pathname: '/users/' + localStorage.getItem("currentUser") }}>Profile</NavBarLink>
+              <NavBarLink onClick={onClick}>Logout</NavBarLink>
+            </div>}
           </Typography>
         </Toolbar>
       </AppBar>

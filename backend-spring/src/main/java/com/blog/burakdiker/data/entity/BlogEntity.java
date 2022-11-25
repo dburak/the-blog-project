@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity //table mapping
 @Table(name="blog")
@@ -27,5 +28,5 @@ public class BlogEntity {
     @Lob
     @Column(columnDefinition = "text")
     String blogContent;
-
+    
 }

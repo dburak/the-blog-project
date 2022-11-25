@@ -3,6 +3,7 @@ package com.burakdiker.api.impl;
 import com.burakdiker.api.IAuthenticationApi;
 import com.burakdiker.business.dto.UserDto;
 import com.burakdiker.business.services.IAuthenticationService;
+import com.burakdiker.business.services.IBlogUserService;
 import com.burakdiker.business.services.IUserServices;
 import com.burakdiker.data.entity.UserEntity;
 import com.burakdiker.security.jwt.JwtProviderImpl;
@@ -29,8 +30,8 @@ public class AuthenticationApiImpl implements IAuthenticationApi {
     private final IUserServices userServices;
 
 
-  private final  AuthenticationManager authenticationManager;
-   private final JwtProviderImpl jwtUtils;
+    private final  AuthenticationManager authenticationManager;
+    private final JwtProviderImpl jwtUtils;
 
 
     //REGISTER

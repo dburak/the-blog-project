@@ -23,7 +23,7 @@ public class FavoriteApiImpl implements IFavoriteApi {
 
     @Override
     @PostMapping
-    public ApiResult saveFavorite(JsonElement jsonElement) {
+    public ApiResult saveFavorite(@RequestBody JsonElement jsonElement) {
         favoriteService.favoriteSave(jsonElement);
         return new ApiResult(200, "Register Successfull", PATH);
     }
@@ -50,7 +50,7 @@ public class FavoriteApiImpl implements IFavoriteApi {
 
     @Override
     @PutMapping
-    public ApiResult updateFavorite(Long id, JsonElement jsonElement) {
+    public ApiResult updateFavorite(@PathVariable Long id, @RequestBody JsonElement jsonElement) {
         favoriteService.favoriteUpdate(id,jsonElement);
         return new ApiResult(200, "Updated", PATH);
     }

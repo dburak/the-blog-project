@@ -20,11 +20,11 @@ public interface IFavoriteServiceRequest {
 
 
     //DELETE
-    @DELETE("/api/v1/comments/{favoriteId}")
+    @DELETE("/api/v1/favorites/{favoriteId}")
     Call<JsonElement> favoriteDelete(@Path("favoriteId") Long id);
 
 
     //UPDATE
-    @PUT("/api/v1/comments/{favoriteId}")
+    @PUT("/api/v1/favorites/{favoriteId}")
     Call<JsonElement> favoriteUpdate(@Path("favoriteId") Long id, @Body JsonElement jsonElement);
 }

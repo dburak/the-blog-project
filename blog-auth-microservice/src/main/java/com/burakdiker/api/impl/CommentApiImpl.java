@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 
@@ -26,17 +27,18 @@ public class CommentApiImpl implements ICommentApi {
 
     @Override
     @PostMapping
-    public ApiResult saveComment(JsonElement jsonElement) {
+    public ApiResult saveComment(@RequestBody JsonElement jsonElement) {
         commentService.commentSave(jsonElement);
         return new ApiResult(200, "Register Successfull", PATH);
     }
 
     @Override
     @GetMapping
-    public ResponseEntity<List<?>> listComment() {
-        commentService.commentList();
-        return ResponseEntity.ok(commentService.commentList());
+    public ResponseEntity<List<?>> listComment(@RequestParam Long blogId) {
+
+        return ResponseEntity.ok(commentService.commentList(blogId));
     }
+
 
     @Override
     @GetMapping("/{commentId}")
@@ -53,7 +55,7 @@ public class CommentApiImpl implements ICommentApi {
 
     @Override
     @PutMapping("/{commentId}")
-    public ApiResult updateComment(@PathVariable Long id, JsonElement jsonElement) {
+    public ApiResult updateComment(@PathVariable Long id, @RequestBody JsonElement jsonElement) {
         commentService.commentUpdate(id,jsonElement);
         return new ApiResult(200, "Updated", PATH);
     }

@@ -20,6 +20,7 @@ const BlogForm = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("tokenKey")
       },
       body: JSON.stringify({
         userId: userId,
@@ -28,16 +29,14 @@ const BlogForm = (props) => {
       }),
     })
     .then((res) => res.json())
-    .catch((err) => console.log("error"))
+    .catch((err) => console.log(err))
   }
 
   
   const handleSubmit = () => {
     saveBlog();
     setOpen(true);
-    setTimeout(() => {
-      window.location.reload(true);
-    }, 2500)
+    
   }
   
   const handleTitle = (value) => {

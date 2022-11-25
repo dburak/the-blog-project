@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IBlogServiceRequest {
     @POST("/api/v1/blogs")
-    Call<JsonElement> blogSave(@Body JsonElement jsonElement);
+    Call<JsonElement> blogSave( @Body JsonElement jsonElement);
 
     //LIST
     @GET("/api/v1/blogs")

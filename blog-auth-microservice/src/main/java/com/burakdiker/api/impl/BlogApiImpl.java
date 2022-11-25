@@ -22,9 +22,9 @@ public class BlogApiImpl implements IBlogApi {
 
     @Override
     @PostMapping
-    public ApiResult saveBlog(JsonElement jsonElement) {
+    public ApiResult saveBlog(@RequestBody JsonElement jsonElement) {
         blogService.blogSave(jsonElement);
-        return new ApiResult(200, "Register Successfull", PATH);
+        return new ApiResult(200, "Blog is successfully sent", PATH);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class BlogApiImpl implements IBlogApi {
 
     @Override
     @PutMapping("/{blogId}")
-    public ApiResult updateBlog(@PathVariable Long id, JsonElement jsonElement) {
+    public ApiResult updateBlog(@PathVariable Long id, @RequestBody JsonElement jsonElement) {
         blogService.blogUpdate(id,jsonElement);
         return new ApiResult(200, "Updated", PATH);
     }

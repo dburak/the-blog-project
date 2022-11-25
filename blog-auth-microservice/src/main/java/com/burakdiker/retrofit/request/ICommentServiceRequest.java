@@ -1,10 +1,12 @@
 package com.burakdiker.retrofit.request;
 
 import com.google.gson.JsonElement;
+import org.springframework.web.bind.annotation.RequestParam;
 import retrofit2.Call;
 import retrofit2.http.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ICommentServiceRequest {
 
@@ -13,7 +15,8 @@ public interface ICommentServiceRequest {
 
     //LIST
     @GET("/api/v1/comments")
-    Call<List<JsonElement>> commentList();
+    Call<List<JsonElement>> commentList(@Query("blogId") Long blogId);
+
 
     //FIND
     @GET("/api/v1/comments/{commentId}")

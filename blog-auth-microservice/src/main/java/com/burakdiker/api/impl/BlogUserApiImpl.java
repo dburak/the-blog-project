@@ -20,12 +20,13 @@ public class BlogUserApiImpl implements IBlogUserApi {
 
     //Injection
     private final IBlogUserService blogUserService;
+
     private static final String PATH = "gateway/user";
 
 
     @Override
     @PostMapping
-    public ApiResult saveUser(JsonElement jsonElement) {
+    public ApiResult saveUser(@RequestBody JsonElement jsonElement) {
         blogUserService.userSave(jsonElement);
         return new ApiResult(200, "Register Successfull", PATH);
     }
@@ -52,7 +53,7 @@ public class BlogUserApiImpl implements IBlogUserApi {
 
     @Override
     @PutMapping("/{userId}")
-    public ApiResult updateUser(Long id, JsonElement jsonElement) {
+    public ApiResult updateUser(@PathVariable Long id, @RequestBody JsonElement jsonElement) {
         blogUserService.userUpdate(id,jsonElement);
         return new ApiResult(200, "Updated", PATH);
     }
