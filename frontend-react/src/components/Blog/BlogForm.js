@@ -9,7 +9,7 @@ import Snackbar from '@mui/material/Snackbar';
 
 
 const BlogForm = (props) => {
-  const {userId } = props;
+  const {userId, userName } = props;
   const [blogTitle, setBlogTitle] = useState("");
   const [blogContent, setBlogContent] = useState("");
   const [open, setOpen] = useState(false);
@@ -24,6 +24,7 @@ const BlogForm = (props) => {
       },
       body: JSON.stringify({
         userId: userId,
+        userName: userName,
         blogTitle: blogTitle,
         blogContent: blogContent,
       }),
@@ -36,6 +37,9 @@ const BlogForm = (props) => {
   const handleSubmit = () => {
     saveBlog();
     setOpen(true);
+    setTimeout(() => {
+      window.location.reload(true);
+    }, 2000)
     
   }
   

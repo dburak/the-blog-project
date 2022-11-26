@@ -82,9 +82,12 @@ const Blog = (props) => {
     if (!isFavorited) {
       saveFavorite();
       setFavoriteCount(favoriteCount + 1);
+      window.location.reload();
+      
     } else {
       deleteFavorite();
       setFavoriteCount(favoriteCount - 1);
+      window.location.reload();
     }
   };
 

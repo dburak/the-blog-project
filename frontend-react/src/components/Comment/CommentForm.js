@@ -34,6 +34,7 @@ const CommentForm = (props) => {
       },
       body: JSON.stringify({
         userId: userId,
+        userName: localStorage.getItem("username"),
         blogId: blogId,
         text: text,
       }),

@@ -67,12 +67,12 @@ public class BlogServicesImpl implements IBlogServices {
         if(userId.isPresent()) {
             blogEntityList = repository.findByUserId(userId.get());
             for (BlogEntity temp : blogEntityList) {
-                BlogDto entityToDto = entityToDto(temp);
-                dtoList.add(entityToDto);
+                List<FavoriteDto> favorites = favoriteServices.listFavorites(Optional.ofNullable(null), Optional.of(temp.getId()));
+                dtoList.add(new BlogDto(temp, favorites));
             }
         }
         else {
-            blogEntityList = repository.findAll();
+            blogEntityList = repository.findAllByOrderByIdDesc();
             for (BlogEntity temp : blogEntityList) {
                 List<FavoriteDto> favorites = favoriteServices.listFavorites(Optional.ofNullable(null), Optional.of(temp.getId()));
                 dtoList.add(new BlogDto(temp, favorites));
@@ -84,8 +84,8 @@ public class BlogServicesImpl implements IBlogServices {
     @Override
     public BlogDto findBlog(Long blogId) {
         BlogEntity blogEntity = repository.findById(blogId).orElseThrow(() -> new ResourceNotFoundException(blogId + " id cannot be found"));
-        BlogDto entityToDto = entityToDto(blogEntity);
-        return entityToDto;
+        List<FavoriteDto> favorites = favoriteServices.listFavorites(Optional.ofNullable(null), Optional.of(blogEntity.getId()));
+        return new BlogDto(blogEntity, favorites);
     }
 
     @Override

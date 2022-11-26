@@ -17,7 +17,6 @@ public class UserDto {
     private Long id;
     private String message;
     private String username;
-    private String name;
     private String password;
     // private LocalDateTime createdDate;
     private Date createdDate;
