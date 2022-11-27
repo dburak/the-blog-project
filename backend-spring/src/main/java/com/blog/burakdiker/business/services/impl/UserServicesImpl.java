@@ -1,6 +1,7 @@
 package com.blog.burakdiker.business.services.impl;
 
 import com.blog.burakdiker.bean.ModelMapperBean;
+import com.blog.burakdiker.bean.PasswordEncoderBean;
 import com.blog.burakdiker.business.dto.UserDto;
 import com.blog.burakdiker.business.services.IUserServices;
 import com.blog.burakdiker.data.entity.UserEntity;
@@ -26,6 +27,7 @@ public class UserServicesImpl implements IUserServices {
     //injection
     private final IUserRepository repository;
     private final ModelMapperBean modelMapperBean;
+    private final PasswordEncoderBean passwordEncoderBean;
 
     // model mapping
     @Override
@@ -41,6 +43,7 @@ public class UserServicesImpl implements IUserServices {
     //CREATE
     @Override
     public UserDto createUser(UserDto userDto) {
+        userDto.setPassword(passwordEncoderBean.passwordEncoderMethod().encode(userDto.getPassword()));
         UserEntity registerEntity = dtoToEntity(userDto);
         repository.save(registerEntity);
         return userDto;

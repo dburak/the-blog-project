@@ -12,6 +12,7 @@ import { useState } from 'react';
 const Auth = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword,setShow] = useState(false)
 
   const handleUsername = (value) => {
     setUsername(value);
@@ -74,7 +75,7 @@ const Auth = () => {
         <InputLabel>Username</InputLabel>
         <Input onChange={(i) => handleUsername(i.target.value)} />
         <InputLabel style={{ top: 80 }}>Password</InputLabel>
-        <Input
+        <Input type={ showPassword ? "text":"password" }
           style={{ top: 40 }}
           onChange={(i) => handlePassword(i.target.value)}
         />
