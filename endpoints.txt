@@ -1,0 +1,76 @@
+--------------------------------------------------
+MICROSERVICE ENDPOINTS
+--------------------------------------------------
+
+// REGISTER
+POST /api/authentication/register HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+{
+     "username":"user",
+     "password":"user"
+}
+
+// LOGIN
+POST /api/authentication/login HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+{
+     "username":"user",
+     "password":"user"
+}
+
+// LIST Blog Posts
+GET /gateway/blog HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+Authorization: No Auth
+
+// FIND Blog with given user id
+GET /gateway/blog?userId={userId} HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+Authorization: No Auth
+
+// FIND a spesific blog post with blog id
+GET /gateway/blog/1 HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+Authorization: No Auth
+
+//CREATE Blog Post
+POST /gateway/blog HTTP/1.1
+Host: localhost:3333
+Authorization: Bearer
+Content-Type: application/json
+{
+    "userId": "1",
+    "userName": "burakdiker",
+    "blogTitle": "blog title",
+    "blogContent": "blog content",
+}
+
+//UPDATE Blog Post
+POST /gateway/blog/{blogId} HTTP/1.1
+Host: localhost:3333
+Authorization: Bearer
+Content-Type: application/json
+{
+    "userId": "1",
+    "userName": "burakdiker",
+    "blogTitle": "blog title",
+    "blogContent": "blog content",
+}
+
+//DELETE Blog Post
+POST /gateway/blog{blogId} HTTP/1.1
+Host: localhost:3333
+Authorization: Bearer
+Content-Type: application/json
+{
+    "userId": "1",
+    "userName": "burakdiker",
+    "blogTitle": "blog title",
+    "blogContent": "blog content",
+}
+
