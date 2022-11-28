@@ -57,7 +57,7 @@ Content-Type: application/json
 }
 
 // UPDATE Blog Post
-POST /gateway/blog/{blogId} HTTP/1.1
+UPDATE /gateway/blog/{blogId} HTTP/1.1
 Host: localhost:3333
 Authorization: Bearer
 Content-Type: application/json
@@ -69,7 +69,7 @@ Content-Type: application/json
 }
 
 // DELETE Blog Post
-DELETE /gateway/blog{blogId} HTTP/1.1
+DELETE /gateway/blog/{blogId} HTTP/1.1
 Host: localhost:3333
 Authorization: Bearer
 Content-Type: application/json
@@ -223,12 +223,7 @@ DELETE /api/v1/blogs/{blogId} HTTP/1.1
 Host: localhost:1111
 Authorization: No Auth
 Content-Type: application/json
-{
-    "userId": "1",
-    "userName": "burakdiker",
-    "blogTitle": "blog title",
-    "blogContent": "blog content",
-}
+
 --------------------BLOG--------------------
 
 --------------------USER--------------------
