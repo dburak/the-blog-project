@@ -1,11 +1,13 @@
---------------------------------------------------
-MICROSERVICE ENDPOINTS
---------------------------------------------------
+----------------------------------------------------------------------
+--------------------MICROSERVICE ENDPOINTS----------------------------
+----------------------------------------------------------------------
 
+--------------------AUTHENTICATION--------------------
 // REGISTER
 POST /api/authentication/register HTTP/1.1
 Host: localhost:3333
 Content-Type: application/json
+Authorization: No Auth
 {
      "username":"user",
      "password":"user"
@@ -15,11 +17,15 @@ Content-Type: application/json
 POST /api/authentication/login HTTP/1.1
 Host: localhost:3333
 Content-Type: application/json
+Authorization: No Auth
 {
      "username":"user",
      "password":"user"
 }
+--------------------AUTHENTICATION--------------------
 
+
+--------------------BLOG--------------------
 // LIST Blog Posts
 GET /gateway/blog HTTP/1.1
 Host: localhost:3333
@@ -38,7 +44,7 @@ Host: localhost:3333
 Content-Type: application/json
 Authorization: No Auth
 
-//CREATE Blog Post
+// CREATE Blog Post
 POST /gateway/blog HTTP/1.1
 Host: localhost:3333
 Authorization: Bearer
@@ -50,7 +56,7 @@ Content-Type: application/json
     "blogContent": "blog content",
 }
 
-//UPDATE Blog Post
+// UPDATE Blog Post
 POST /gateway/blog/{blogId} HTTP/1.1
 Host: localhost:3333
 Authorization: Bearer
@@ -62,8 +68,8 @@ Content-Type: application/json
     "blogContent": "blog content",
 }
 
-//DELETE Blog Post
-POST /gateway/blog{blogId} HTTP/1.1
+// DELETE Blog Post
+DELETE /gateway/blog{blogId} HTTP/1.1
 Host: localhost:3333
 Authorization: Bearer
 Content-Type: application/json
@@ -73,4 +79,248 @@ Content-Type: application/json
     "blogTitle": "blog title",
     "blogContent": "blog content",
 }
+--------------------BLOG--------------------
 
+--------------------USER--------------------
+// LIST Users
+GET /gateway/user HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+Authorization: Bearer
+
+// DELETE User
+DELETE /gateway/blog/{userId} HTTP/1.1
+Host: localhost:3333
+Authorization: Bearer
+Content-Type: application/json
+
+// FIND a spesific user with user id
+GET /gateway/blog/{userId} HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+Authorization: Bearer
+--------------------USER--------------------
+
+--------------------COMMENT--------------------
+// LIST Comments
+GET /gateway/comment HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+Authorization: No Auth
+
+// FIND a spesific comment with comment id
+GET /gateway/comment/{commentId} HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+Authorization: No Auth
+
+// FIND Comment with given blog id
+GET /gateway/comment?blogId={blogId} HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+Authorization: No Auth
+
+// CREATE Comment
+POST /gateway/comment HTTP/1.1
+Host: localhost:3333
+Authorization: Bearer
+Content-Type: application/json
+{
+    "userId": 1,
+    "userName": "burakdiker",
+    "blogId": "1",
+    "text": "this is a comment",
+}
+
+// DELETE Comment
+DELETE /gateway/comment/{commentId} HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+Authorization: No Auth
+--------------------COMMENT--------------------
+
+
+--------------------FAVORITE--------------------
+// LIST Favorites
+GET /gateway/favorite HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+Authorization: Bearer
+
+// FIND a spesific favorite with favorite id
+GET /gateway/favorite/{favoriteId} HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+Authorization: Bearer
+
+// CREATE Favorite
+POST /gateway/favorite HTTP/1.1
+Host: localhost:3333
+Authorization: Bearer
+Content-Type: application/json
+{
+    "userId": "1",
+    "blogId": "1",
+}
+
+// DELETE Favorite
+DELETE /gateway/favorite/{favoriteId} HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+Authorization: Bearer
+--------------------FAVORITE--------------------
+
+
+----------------------------------------------------------------------
+--------------------BLOG ENDPOINTS------------------------------------
+----------------------------------------------------------------------
+
+--------------------BLOG--------------------
+// LIST Blog Posts
+GET /api/v1/blogs HTTP/1.1
+Host: localhost:1111
+Content-Type: application/json
+Authorization: No Auth
+
+// FIND Blog with given user id
+GET /api/v1/blogs?userId={userId} HTTP/1.1
+Host: localhost:1111
+Content-Type: application/json
+Authorization: No Auth
+
+// FIND a spesific blog post with blog id
+GET /api/v1/blogs/1 HTTP/1.1
+Host: localhost:1111
+Content-Type: application/json
+Authorization: No Auth
+
+// CREATE Blog Post
+POST /api/v1/blogs HTTP/1.1
+Host: localhost:1111
+Authorization: No Auth
+Content-Type: application/json
+{
+    "userId": "1",
+    "userName": "burakdiker",
+    "blogTitle": "blog title",
+    "blogContent": "blog content",
+}
+
+// UPDATE Blog Post
+POST /api/v1/blogs/{blogId} HTTP/1.1
+Host: localhost:1111
+Authorization: No Auth
+Content-Type: application/json
+{
+    "userId": "1",
+    "userName": "burakdiker",
+    "blogTitle": "blog title",
+    "blogContent": "blog content",
+}
+
+// DELETE Blog Post
+DELETE /api/v1/blogs/{blogId} HTTP/1.1
+Host: localhost:1111
+Authorization: No Auth
+Content-Type: application/json
+{
+    "userId": "1",
+    "userName": "burakdiker",
+    "blogTitle": "blog title",
+    "blogContent": "blog content",
+}
+--------------------BLOG--------------------
+
+--------------------USER--------------------
+// LIST Users
+GET /api/v1/users HTTP/1.1
+Host: localhost:1111
+Content-Type: application/json
+Authorization: No Auth
+
+// DELETE User
+DELETE /api/v1/users/{userId} HTTP/1.1
+Host: localhost:1111
+Authorization: No Auth
+Content-Type: application/json
+
+// FIND a spesific user with user id
+GET /api/v1/users/{userId} HTTP/1.1
+Host: localhost:1111
+Content-Type: application/json
+Authorization: No Auth
+--------------------USER--------------------
+
+--------------------COMMENT--------------------
+// LIST Comments
+GET /api/v1/comments HTTP/1.1
+Host: localhost:1111
+Content-Type: application/json
+Authorization: No Auth
+
+// FIND a spesific comment with comment id
+GET /api/v1/comments/{commentId} HTTP/1.1
+Host: localhost:1111
+Content-Type: application/json
+Authorization: No Auth
+
+// FIND Comment with given blog id
+GET /api/v1/comments?blogId={blogId} HTTP/1.1
+Host: localhost:1111
+Content-Type: application/json
+Authorization: No Auth
+
+// FIND Comment with given user id
+GET /api/v1/comments?userId={userId} HTTP/1.1
+Host: localhost:1111
+Content-Type: application/json
+Authorization: No Auth
+
+// CREATE Comment
+POST /api/v1/comments HTTP/1.1
+Host: localhost:1111
+Authorization: No Auth
+Content-Type: application/json
+{
+    "userId": 1,
+    "userName": "burakdiker",
+    "blogId": "1",
+    "text": "this is a comment",
+}
+
+// DELETE Comment
+DELETE /api/v1/comments/{commentId} HTTP/1.1
+Host: localhost:3333
+Content-Type: application/json
+Authorization: No Auth
+--------------------COMMENT--------------------
+
+--------------------FAVORITE--------------------
+// LIST Favorites
+GET /api/v1/favorites/ HTTP/1.1
+Host: localhost:1111
+Content-Type: application/json
+Authorization: No Auth
+
+// FIND a spesific favorite with favorite id
+GET /api/v1/favorites/{favoriteId} HTTP/1.1
+Host: localhost:1111
+Content-Type: application/json
+Authorization: No Auth
+
+// CREATE Favorite
+POST /api/v1/favorites/ HTTP/1.1
+Host: localhost:1111
+Authorization: No Auth
+Content-Type: application/json
+{
+    "userId": "1",
+    "blogId": "1",
+}
+
+// DELETE Favorite
+DELETE /api/v1/favorites/{favoriteId} HTTP/1.1
+Host: localhost:1111
+Content-Type: application/json
+Authorization: No auth
+--------------------FAVORITE--------------------
