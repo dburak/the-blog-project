@@ -8,7 +8,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root1111
       - MYSQL_DATABASE=blog_project
-  app:
+  backend:
     container_name: blogbackend2
     image: blogbackend2:latest
     restart: always
@@ -19,3 +19,28 @@ services:
       - spring.datasource.url=jdbc:mysql://mysqldb:3306/blog_project?useSSL=false&allowPublicKeyRetrieval=true
     depends_on:
       - mysqldb
+  postgresqldb:
+    image: postgres
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=techcareerairtiesgateway
+  backendmicro:
+    container_name: blogauth
+    image: blogauth:latest
+    restart: always
+    build: .
+    ports:
+      - "3333:3333"
+    environment:
+      - spring.datasource.url=jdbc:postgresql://postgresqldb:5432/techcareerairtiesgateway?useSSL=false&allowPublicKeyRetrieval=true&currentSchema=sc_gateway
+    depends_on:
+      - postgresqldb
+  front-end:
+    build: front-end
+    image: blogfrontend:latest
+    ports:
+      - 3000:3000
