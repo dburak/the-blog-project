@@ -290,7 +290,7 @@ Content-Type: application/json
 
 // DELETE Comment
 DELETE /api/v1/comments/{commentId} HTTP/1.1
-Host: localhost:3333
+Host: localhost:1111
 Content-Type: application/json
 Authorization: No Auth
 --------------------COMMENT--------------------
