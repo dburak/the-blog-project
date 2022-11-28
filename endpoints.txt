@@ -308,6 +308,18 @@ Host: localhost:1111
 Content-Type: application/json
 Authorization: No Auth
 
+// FIND Favorite with given blog id
+GET /api/v1/favorites?blogId={blogId} HTTP/1.1
+Host: localhost:1111
+Content-Type: application/json
+Authorization: No Auth
+
+// FIND Favorite with given user id
+GET /api/v1/favorites?userId={userId} HTTP/1.1
+Host: localhost:1111
+Content-Type: application/json
+Authorization: No Auth
+
 // CREATE Favorite
 POST /api/v1/favorites/ HTTP/1.1
 Host: localhost:1111
