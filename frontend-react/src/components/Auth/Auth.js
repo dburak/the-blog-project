@@ -25,7 +25,7 @@ const Auth = () => {
   const sendRequest = (path) => {
 
     if(path === "register") {
-      fetch('http://localhost:1111/api/v1/users/', {
+      fetch('http://192.168.1.16:1111/api/v1/users/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ const Auth = () => {
         .catch((err) => console.log(err));
     }
 
-    fetch('/api/authentication/' + path, {
+    fetch('api/authentication/' + path, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

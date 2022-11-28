@@ -16,7 +16,7 @@ services:
     ports:
       - "1111:1111"
     environment:
-      - spring.datasource.url=jdbc:mysql://mysqldb:3306/blog_project?useSSL=false&allowPublicKeyRetrieval=true
+      - spring.datasource.url=jdbc:mysql://host.docker.internal:3306/blog_project?useSSL=false&allowPublicKeyRetrieval=true
     depends_on:
       - mysqldb
   postgresqldb:
@@ -36,11 +36,7 @@ services:
     ports:
       - "3333:3333"
     environment:
-      - spring.datasource.url=jdbc:postgresql://postgresqldb:5432/techcareerairtiesgateway?useSSL=false&allowPublicKeyRetrieval=true&currentSchema=sc_gateway
+      - spring.datasource.url=jdbc:postgresql://host.docker.internal:5432/techcareerairtiesgateway?useSSL=false&allowPublicKeyRetrieval=true
     depends_on:
       - postgresqldb
-  front-end:
-    build: front-end
-    image: blogfrontend:latest
-    ports:
-      - 3000:3000
+      
