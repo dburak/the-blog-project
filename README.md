@@ -77,7 +77,6 @@ The Blog Project is a java-based full-stack web application
     "blogTitle": "blog title",
     "blogContent": "blog content",
     }
-    #### Blog - CREATE Blog Post
     
 #### Blog - UPDATE Blog Post
 
