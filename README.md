@@ -1,6 +1,81 @@
 # The Blog Project
 The Blog Project is a java-based full-stack web application
 
+# Table of Contents  
+[1. Functional Requirements](#functional-requirements)  
+
+[2. Technologies Used](#technologies-used)
+
+[3. Endpoints](#endpoints)
+
+[3.1 Microservice Endpoints](#microservice-endpoints)
+
+[3.1.1 Authentication - Register](#authentication---register)
+
+[3.1.2 Authentication - Login](#authentication---login)
+
+[3.1.3 Blog - LIST Blog Posts](#blog---list-blog-posts)
+
+[3.1.4 Blog - FIND Blog with given user id](#blog---find-blog-with-given-user-id)
+
+[3.1.5 Blog - FIND a spesific blog post with blog id](#blog---find-a-spesific-blog-post-with-blog-id)
+
+[3.1.6 Blog - CREATE Blog Post](#blog---create-blog-post)
+
+[3.1.7 Blog - UPDATE Blog Post](#blog---update-blog-post)
+
+[3.1.8 Blog - DELETE Blog Post](#blog---delete-blog-post)
+
+[3.1.9 Comment - LIST Comments](#comment---list-comments)
+
+[3.1.10 Comment - FIND a spesific comment with comment id](#comment---find-a-spesific-comment-with-comment-id)
+
+[3.1.11 Comment - FIND a spesific comment with given blog id](#comment---find-a-spesific-comment-with-given-blog-id)
+
+[3.1.12 Comment - CREATE Comment](#comment---create-comment)
+
+[3.1.13 Comment - DELETE Comment](#comment---delete-comment)
+
+[3.1.14 Favorite - LIST Favorites](#favorite---list-favorites)
+
+[3.1.15 Favorite - FIND a spesific favorite with favorite id](#favorite---find-a-spesific-favorite-with-favorite-id)
+
+[3.1.16 Favorite - CREATE Favorite](#favorite---create-favorite)
+
+[3.1.17 Favorite - DELETE Favorite](#favorite---delete-favorite)
+
+[3.2 Blog Endpoints](#blog-endpoints)
+
+[3.2.1 Blog - LIST Blog Posts](#blog---list-blog-posts-1)
+
+[3.2.2 Blog - FIND Blog with given user id](#blog---find-blog-with-given-user-id-1)
+
+[3.2.3 Blog - FIND Blog with given blog id](#blog---find-blog-with-given-blog-id)
+
+[3.2.4 Comment - LIST Comments](#comment---list-comments-1)
+
+[3.2.5 Comment - FIND a spesific comment with comment id](#comment---find-a-spesific-comment-with-comment-id-1)
+
+[3.2.6 Comment - FIND a spesific comment with given blog id](#comment---find-a-spesific-comment-with-given-blog-id-1)
+
+[3.2.7 Comment - FIND a spesific comment with given user id](#comment---find-a-spesific-comment-with-given-user-id)
+
+[3.2.8 Comment - CRETE Comment](#comment---crete-comment)
+
+[3.2.9 Comment - DELETE Comment](#comment---delete-comment-1)
+
+[3.2.10 Favorite - LIST Favorites](#favorite---list-favorites-1)
+
+[3.2.11 Favorite - FIND a spesific favorite with favorite id](#favorite---find-a-spesific-favorite-with-favorite-id-1)
+
+[3.2.12 Favorite - FIND a spesific favorite with blog id](#favorite---find-a-spesific-favorite-with-blog-id)
+
+[3.2.13 Favorite - FIND a spesific favorite with user id](#favorite---find-a-spesific-favorite-with-user-id)
+
+[3.2.14 Favorite - CREATE Favorite](#favorite---create-favorite-1)
+
+[3.2.15 Favorite - DELETE Favorite](#favorite---delete-favorite-1)
+
 ## Functional Requirements
 - Users shall be able to register
 - Users shall be able to login
