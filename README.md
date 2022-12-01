@@ -174,12 +174,6 @@ The Blog Project is a java-based full-stack web application
     Content-Type: application/json
     Authorization: Bearer
     Content-Type: application/json
-    {
-    "userId": "1",
-    "userName": "burakdiker",
-    "blogTitle": "updated blog title",
-    "blogContent": "updated blog content",
-    }
     
 #### Comment - LIST Comments
 
