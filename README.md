@@ -173,7 +173,6 @@ The Blog Project is a java-based full-stack web application
     http://localhost:3333/gateway/blog/{blogId} HTTP/1.1
     Content-Type: application/json
     Authorization: Bearer
-    Content-Type: application/json
     
 #### Comment - LIST Comments
 
